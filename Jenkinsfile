@@ -3,7 +3,7 @@ pipeline {
   environment {
     GIT_REPO_NAME = env.GIT_URL.replaceFirst(/^.*\/([^\/]+?).git$/, '$1')
     SOME_SECRET_KEY = credentials('some-secret-key')
-    IMAGE_NAME = nest-helloworld
+    IMAGE_NAME = 'nest-helloworld'
   }
   stages {
     stage('Package Docker container') {
