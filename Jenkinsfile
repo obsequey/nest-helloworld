@@ -10,7 +10,7 @@ pipeline {
       steps {
         sh 'echo $SOME_SECRET_KEY'
         sh 'docker build . -t "localhost:5000/${IMAGE_NAME}:${GIT_REPO_NAME}.${BRANCH_NAME}.${BUILD_NUMBER}"'
-        sh 'docker push localhost:5000/${IMAGE_NAME}:{IMAGE_NAME}:${GIT_REPO_NAME}.${BRANCH_NAME}.${BUILD_NUMBER}'
+        sh 'docker push localhost:5000/${IMAGE_NAME}:${GIT_REPO_NAME}.${BRANCH_NAME}.${BUILD_NUMBER}'
         sh 'docker stop ${IMAGE_NAME} || true'
         sh 'docker run -d --rm --name ${IMAGE_NAME} -p 3000 localhost:5000/${IMAGE_NAME}'
         sh '''
