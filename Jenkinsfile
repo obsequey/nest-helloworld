@@ -6,7 +6,13 @@ pipeline {
     IMAGE_NAME = 'nest-helloworld'
   }
   stages {
-    stage('Package Docker container') {
+    stage('Run db') {
+      steps {
+        sh 'docker run -d --rm --name postgres.${GIT_REPO_NAME}.${BRANCH_NAME} postgres:11 -v pgdata:/var/lib/postgresql/data'
+      }
+    }
+
+    stage('Output some') {
       steps {
         sh 'echo $SOME_SECRET_KEY'
         sh 'docker build . -t "localhost:5000/${IMAGE_NAME}:${GIT_REPO_NAME}.${BRANCH_NAME}.${BUILD_NUMBER}"'
